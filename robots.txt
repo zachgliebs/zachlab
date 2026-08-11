@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dev.html
+
+Sitemap: https://zachlab.us/sitemap.xml
