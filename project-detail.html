@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Detail | Zach Lieberman</title>
+  <meta name="description" content="Detailed project overview for Zach Lieberman's work.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --steel-950: #0c1117;
+      --steel-900: #141d28;
+      --steel-800: #1b2a36;
+      --steel-700: #2c4052;
+      --steel-500: #6d8197;
+      --metal: #b7bfc7;
+      --metal-strong: #dfe6ef;
+      --bronze: #cb8d52;
+      --line: rgba(255, 255, 255, 0.12);
+      --shadow: rgba(2, 4, 8, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top, rgba(203, 141, 82, 0.12), transparent 30%),
+        linear-gradient(180deg, #0b1016 0%, #101922 100%);
+      color: #edf2f7;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    a { text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--line);
+      background: rgba(10, 14, 20, 0.82);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      min-height: 72px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: #edf2f7;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .brand i { color: #f3c899; }
+
+    .nav-link {
+      color: rgba(237, 242, 247, 0.8);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.7rem 1rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-link:hover {
+      border-color: rgba(203, 141, 82, 0.45);
+      transform: translateY(-1px);
+      color: #edf2f7;
+      text-decoration: none;
+    }
+
+    .project-page {
+      padding: 4rem 0 5rem;
+    }
+
+    .hero-shell {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(29, 39, 48, 0.92), rgba(10, 14, 20, 0.78));
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(203, 141, 82, 0.12), transparent 50%, rgba(120, 153, 188, 0.12));
+      pointer-events: none;
+    }
+
+    .hero-shell .container {
+      position: relative;
+      z-index: 1;
+      padding: 3rem 0 2.5rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(203, 141, 82, 0.45);
+      background: rgba(203, 141, 82, 0.1);
+      color: #f3c899;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-copy {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 680px;
+      color: rgba(237, 242, 247, 0.8);
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 1.25rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(109, 129, 151, 0.14);
+      border: 1px solid var(--line);
+      color: #edf2f7;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-visual {
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 1.5rem;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(203, 141, 82, 0.18), rgba(109, 129, 151, 0.12));
+      box-shadow: 0 18px 45px var(--shadow);
+      color: #f3c899;
+      font-size: clamp(4rem, 7vw, 6rem);
+    }
+
+    .detail-shell {
+      padding-top: 2.25rem;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .detail-card {
+      background: rgba(17, 24, 30, 0.82);
+      border: 1px solid var(--line);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+    }
+
+    .detail-card h2 {
+      margin: 0 0 0.9rem;
+      font-size: 1.5rem;
+      letter-spacing: -0.03em;
+    }
+
+    .detail-card p,
+    .detail-card li {
+      color: rgba(237, 242, 247, 0.78);
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    .detail-card ul {
+      margin: 0;
+      padding-left: 1.2rem;
+    }
+
+    .detail-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .outcome {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1rem;
+      border-radius: 0.9rem;
+      background: rgba(203, 141, 82, 0.1);
+      border: 1px solid rgba(203, 141, 82, 0.35);
+      color: #f3c899;
+      font-weight: 600;
+    }
+
+    .back-section {
+      text-align: center;
+      padding-top: 2rem;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: linear-gradient(135deg, #d89a5b 0%, #b66f37 100%);
+      color: #181b1d;
+      border-radius: 999px;
+      padding: 0.9rem 1.3rem;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .back-button:hover {
+      text-decoration: none;
+      color: #181b1d;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(203, 141, 82, 0.25);
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid,
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="topbar">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html"><i class="bi bi-arrow-left"></i>Zach Lieberman</a>
+      <a class="nav-link" href="projects.html">Back to projects</a>
+    </div>
+  </nav>
+
+  <main class="project-page">
+    <section class="hero-shell">
+      <div class="container">
+        <span class="eyebrow"><i class="bi bi-folder2-open"></i> Project detail</span>
+        <div class="hero-grid">
+          <div>
+            <h1 id="project-title">Project</h1>
+            <p id="project-summary" class="hero-copy"></p>
+            <div class="tag-row" id="project-tags"></div>
+          </div>
+          <div class="hero-visual"><i class="bi bi-gear-fill" id="project-icon"></i></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container detail-shell">
+      <div class="detail-grid">
+        <article class="detail-card">
+          <h2>Overview</h2>
+          <p id="overview-text"></p>
+        </article>
+
+        <article class="detail-card">
+          <h2>Approach</h2>
+          <p id="approach-text"></p>
+        </article>
+
+        <article class="detail-card full">
+          <h2>Highlights</h2>
+          <ul id="highlights-list"></ul>
+        </article>
+
+        <article class="detail-card full">
+          <h2>Impact</h2>
+          <div class="outcome"><i class="bi bi-check-circle-fill"></i> <span id="impact-text"></span></div>
+        </article>
+      </div>
+
+      <div class="back-section">
+        <a class="back-button" href="projects.html"><i class="bi bi-arrow-left"></i> Return to project archive</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const projectData = {
+      'project-one': {
+        title: 'Project One',
+        category: 'Personal',
+        icon: 'bi-gear-fill',
+        summary: 'A personal project focused on building a more efficient and repeatable workflow for an engineering problem I kept encountering.',
+        overview: 'This project gave me a chance to work through a problem from start to finish using a hands-on design mindset. I focused on identifying the underlying pain point, simplifying the process, and building a better way to execute the task more reliably.',
+        approach: 'I broke the idea into a practical workflow, started with the core need, and iterated toward something cleaner and easier to use. The process emphasized function, speed, and the ability to improve as the project matured.',
+        highlights: ['Built a practical system around an identified workflow gap', 'Iterated quickly to improve reliability and usability', 'Turned an idea into a working, testable prototype'],
+        impact: 'Created a stronger process that made a difficult task easier to repeat and refine.',
+        tags: ['Personal', 'Prototype', 'Iteration']
+      },
+      'project-two': {
+        title: 'Project Two',
+        category: 'School Project',
+        icon: 'bi-mortarboard-fill',
+        summary: 'A school-based design project that explored problem solving, documentation, and turning theory into a more tangible engineering concept.',
+        overview: 'This work reflected a classroom-driven engineering challenge where I had to anchor ideas in analysis, testing, and clear communication. The project gave me a way to connect coursework with real design decision-making.',
+        approach: 'I organized the work around requirements, constraints, and objective evaluation so the final concept stayed grounded in engineering reasoning. The goal was to balance technical rigor with design clarity and communication.',
+        highlights: ['Applied classroom fundamentals to a full design workflow', 'Used analysis and iteration to refine the concept', 'Documented decisions and tradeoffs clearly'],
+        impact: 'Developed a more structured design approach that translated theory into concrete, useful outcomes.',
+        tags: ['School', 'Design', 'Analysis']
+      },
+      'project-three': {
+        title: 'Project Three',
+        category: 'Group Work',
+        icon: 'bi-people-fill',
+        summary: 'A collaborative project that required coordination, communication, and alignment across multiple contributors and technical responsibilities.',
+        overview: 'This project emphasized group problem solving and the importance of turning individual work into a unified final product. It required consistent communication and a shared understanding of how each task contributed to the larger goal.',
+        approach: 'I focused on bringing structure to the team process, aligning priorities, and helping the project stay practical while each member worked on their parts. That coordination was key to keeping the work moving efficiently.',
+        highlights: ['Coordinated shared deliverables across team members', 'Maintained process consistency during a multi-step build', 'Improved communication around constraints and progress'],
+        impact: 'Turned a team effort into a more organized and cohesive engineering outcome.',
+        tags: ['Group', 'Collaboration', 'Systems']
+      },
+      'project-four': {
+        title: 'Project Four',
+        category: 'Personal',
+        icon: 'bi-tools',
+        summary: 'A personal build focused on practical problem solving and refining a process that needed better efficiency and usability.',
+        overview: 'This project centered on making a system easier to use while also improving how it functioned under real conditions. It highlighted how small changes to design and workflow can create a much more effective result.',
+        approach: 'I started with a specific need and worked through the constraints before turning the idea into a more refined version. The process included repeated testing and recalibration to make the final result more useful.',
+        highlights: ['Improved a workflow with hands-on iteration', 'Focused on function and long-term usability', 'Turned a rough concept into a more polished build'],
+        impact: 'Created a practical solution that balanced simplicity, reliability, and ongoing improvement.',
+        tags: ['Personal', 'Build', 'Optimization']
+      },
+      'project-five': {
+        title: 'Project Five',
+        category: 'School Project',
+        icon: 'bi-book-half',
+        summary: 'A design and analysis effort centered on research, iteration, and turning classroom concepts into a clearer engineering solution.',
+        overview: 'This project pushed me to connect conceptual learning with concrete implementation. The process involved balancing theory, testing, and the practical realities of design decisions in a way that made the solution more grounded.',
+        approach: 'I worked through assumptions, refined the concept with testing, and iterated based on what the evidence suggested. The goal was to create a result that was thoughtful, traceable, and technically reasoned.',
+        highlights: ['Connected theory to a practical design process', 'Used iteration to improve the final outcome', 'Strengthened communication through clear documentation'],
+        impact: 'Built confidence in translating academic concepts into a more complete engineering proposal.',
+        tags: ['School', 'Research', 'Iteration']
+      },
+      'project-six': {
+        title: 'Project Six',
+        category: 'Group Work',
+        icon: 'bi-diagram-3',
+        summary: 'A collaborative effort centered on aligning different skill sets into a single, workable project direction.',
+        overview: 'This project required balancing multiple perspectives and coordinating work across different technical decisions. It was a good example of how project success depends on clear communication, process discipline, and alignment.',
+        approach: 'I helped shape the work around the shared goal, keeping the team moving while maintaining focus on practical execution. That meant clarifying tasks, reinforcing the shared strategy, and staying adaptable when the project evolved.',
+        highlights: ['Aligned team priorities around a common objective', 'Managed complexity while keeping momentum', 'Supported a collaborative, process-driven approach'],
+        impact: 'Created a more efficient group workflow that kept the project grounded and moving forward.',
+        tags: ['Group', 'Process', 'Coordination']
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id') || 'project-one';
+    const data = projectData[id] || projectData['project-one'];
+
+    document.title = `${data.title} | Zach Lieberman`;
+    document.getElementById('project-title').textContent = data.title;
+    document.getElementById('project-summary').textContent = data.summary;
+    document.getElementById('overview-text').textContent = data.overview;
+    document.getElementById('approach-text').textContent = data.approach;
+    document.getElementById('impact-text').textContent = data.impact;
+    document.getElementById('project-icon').className = `bi ${data.icon}`;
+
+    const tags = document.getElementById('project-tags');
+    tags.innerHTML = data.tags.map((tag) => `<span class="tag">${tag}</span>`).join('');
+
+    const list = document.getElementById('highlights-list');
+    list.innerHTML = data.highlights.map((item) => `<li>${item}</li>`).join('');
+  </script>
+</body>
+</html>
